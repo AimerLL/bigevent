@@ -23,11 +23,47 @@
             <form class="login_form">
                 <i class="iconfont icon-user"></i>
                 <i class="iconfont icon-key"></i>
-                <input type="text" class="input_txt" placeholder="邮箱/手机号">
-                <input type="password" class="input_pass" placeholder="密码">
-                <input type="submit" class="input_sub" value="登 录">
+                <input type="text" id="myName" class="input_txt" placeholder="用户名">
+                <input type="password" id="myPassword" class="input_pass" placeholder="密码">
+                <!-- 如果是submit的按钮，在表单中，点击后会有一个默认提交的动作
+                        把submit改为button，就不会提交 -->
+                <input id="btnLogin" type="button" class="input_sub" value="登 录">
             </form>
         </div>
-    </div> 
+    </div>
+    <script src="../js库/jquery-1.12.4.min.js"></script>
+    <script>
+        // 1.点击登录按钮，创建点击事件，跳转页面
+        $("#btnLogin").click(function () {
+            // 获取用户名和密码
+            var myName = $("#myName").val().trim()
+            var myPassword = $("#myPassword").val().trim()
+            console.log(myName, myPassword);
+
+            // 2.判断用户名和密码是否为空
+            //      1.空   提示用户账户密码为空
+            if (myName == '' || myPassword == '') {
+                alert('不能为空');
+                return;
+            }
+
+            //      2.非空   ajax  调用接口，响应回来后根据提示
+            //              $.post(地址，参数，回调)
+            $.post('http://192.168.1.100:8000/admin/login', {
+                'user_name': myName,
+                'password': myPassword
+            }).then(function(res){
+                console.log(res);
+                if (res.code === 200) {
+                    alert("登录成功")
+                }else{
+                    alert(res.msg)
+                }
+            })
+            // 登录成功，跳转到后台首页
+            // 登录失败，提示用户
+        })
+    </script>
 </body>
+
 </html>
