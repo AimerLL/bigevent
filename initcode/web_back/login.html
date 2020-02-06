@@ -33,6 +33,27 @@
     </div>
     <script src="../js库/jquery-1.12.4.min.js"></script>
     <script>
+        //定义一个对象，其中一个方法是login 
+        var user = {
+            login: function (myName, myPassword) {
+                // $.post(地址，参数，回调)
+                $.post('http://192.168.1.100:8000/admin/login', {
+                    'user_name': myName,
+                    'password': myPassword
+                }).then(function (res) {
+                    console.log(res);
+                    if (res.code === 200) {
+                        // alert("登录成功")
+                        // 登陆成功跳转到主页
+                        window.location.href="./index.html"
+                    } else {
+                        alert(res.msg)
+                    }
+                })
+            }
+        }
+    </script>
+    <script>
         // 1.点击登录按钮，创建点击事件，跳转页面
         $("#btnLogin").click(function () {
             // 获取用户名和密码
@@ -47,21 +68,8 @@
                 return;
             }
 
-            //      2.非空   ajax  调用接口，响应回来后根据提示
-            //              $.post(地址，参数，回调)
-            $.post('http://192.168.1.100:8000/admin/login', {
-                'user_name': myName,
-                'password': myPassword
-            }).then(function(res){
-                console.log(res);
-                if (res.code === 200) {
-                    alert("登录成功")
-                }else{
-                    alert(res.msg)
-                }
-            })
-            // 登录成功，跳转到后台首页
-            // 登录失败，提示用户
+            //语义化  调上面的方法 
+            user.login(myName, myPassword)
         })
     </script>
 </body>
