@@ -112,33 +112,10 @@
 
     </script>
 
-    <script>
-        var user = {
-            // 用户退出
-            logout: function () {
-                $.post('http://localhost:8000/admin/logout').then(function (res) {
-                    console.log(res);
-                    if (res.code === 200) {
-                        alert('成功退出')
-                        window.location.href = "./login.html"
-                    } else {
-                        alert(res.msg)
-                    }
-                })
-            },
-            // 获取用户信息
-            getInfo: function () {
-                $.get("http://localhost:8000/admin/getuser").then(function (res) {
-                    if (res.code === 200) {
-                        // 显示内容
-                        $('#userName').text(res.data.nickname)
-                        $('.userImg').attr('src', res.data.user_pic)
-                    }
-                })
-            }
-        }
-
-    </script>
+    <!-- 引入config.sj 接口  -->
+    <script src="./js/tuil/config.js"></script>
+    <!-- 引入user模块 -->
+    <script src="./js/tuil/user.js"></script>
 
     <script>
         // 1.用户退出  
@@ -146,12 +123,26 @@
         $('#btnLogout').click(function () {
 
             // 弹窗让用户确认退出
-            user.logout()
+            user.logout().then(function (res) {
+                console.log(res);
+                if (res.code === 200) {
+                    alert('成功退出')
+                    window.location.href = "./login.html"
+                } else {
+                    alert(res.msg)
+                }
+            })
 
         })
 
         // 2.获取管理员信息并显示
-            user.getInfo()
+        user.getInfo().then(function (res) {
+            if (res.code === 200) {
+                // 显示内容
+                $('#userName').text(res.data.nickname)
+                $('.userImg').attr('src', res.data.user_pic)
+            }
+        })
     </script>
 </body>
 

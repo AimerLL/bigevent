@@ -32,27 +32,12 @@
         </div>
     </div>
     <script src="../js库/jquery-1.12.4.min.js"></script>
-    <script>
-        //定义一个对象，其中一个方法是login 
-        var user = {
-            login: function (myName, myPassword) {
-                // $.post(地址，参数，回调)
-                $.post('http://localhost:8000/admin/login', {
-                    'user_name': myName,
-                    'password': myPassword
-                }).then(function (res) {
-                    console.log(res);
-                    if (res.code === 200) {
-                        // alert("登录成功")
-                        // 登陆成功跳转到主页
-                        window.location.href="./index.html"
-                    } else {
-                        alert(res.msg)
-                    }
-                })
-            }
-        }
-    </script>
+
+    <!-- 引入config.sj 接口  -->
+    <script src="./js/tuil/config.js"></script>
+    <!-- 引入user模块 -->
+    <script src="./js/tuil/user.js"></script>
+
     <script>
         // 1.点击登录按钮，创建点击事件，跳转页面
         $("#btnLogin").click(function () {
@@ -69,7 +54,16 @@
             }
 
             //语义化  调上面的方法 
-            user.login(myName, myPassword)
+            user.login(myName, myPassword).then(function (res) {
+                console.log(res);
+                if (res.code === 200) {
+                    // alert("登录成功")
+                    // 登陆成功跳转到主页
+                    window.location.href = "./index.html"
+                } else {
+                    alert(res.msg)
+                }
+            })
         })
     </script>
 </body>
