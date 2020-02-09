@@ -37,7 +37,7 @@
         var user = {
             login: function (myName, myPassword) {
                 // $.post(地址，参数，回调)
-                $.post('http://192.168.1.100:8000/admin/login', {
+                $.post('http://localhost:8000/admin/login', {
                     'user_name': myName,
                     'password': myPassword
                 }).then(function (res) {
