@@ -2,7 +2,7 @@
 // 把这个项目中所有的接口地址放在这里
 
 // 所有接口的基地址
-var BASHURL =  'http://192.168.1.101:8000'
+var BASHURL =  'http://192.168.1.100:8000'
 
 // 用来保存所有的接口信息
 var APILIST = {
@@ -11,5 +11,11 @@ var APILIST = {
     // 用户退出接口
     user_logout : BASHURL + '/admin/logout',
     // 获取用户信息接口
-    user_getInfo : BASHURL + '/admin/getuser'
+    user_getInfo : BASHURL + '/admin/getuser',
+    // 文章类别获取
+    category_get : BASHURL + '/admin/category_search',
+    // 添加文章类别
+    category_add : BASHURL + '/admin/category_add',
+    // 删除文章类别
+    category_del : BASHURL + '/admin/category_delete'
 }
