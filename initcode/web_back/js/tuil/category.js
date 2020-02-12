@@ -6,12 +6,13 @@ var category = {
         return $.get(APILIST.category_get)
     },
     // 添加文章类别
-    add: function(name,slug){
+    add: function (name, slug) {
         return $.post(APILIST.category_add,
-        {'name': name, 'slug':slug})
+            { 'name': name, 'slug': slug })
     },
     // 删除文章类别
-    del: function(){
-        return $.post(APILIST.category_del)
+    del: function (id) {
+        return $.post(APILIST.category_del,
+            { 'id': id })
     }
 }

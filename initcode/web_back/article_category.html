@@ -113,7 +113,7 @@
             <td class="text-center">
                 <a href="javascript:editTr({&quot;id&quot;:&quot;4&quot;,&quot;slug&quot;:&quot;travel&quot;,&quot;name&quot;:&quot;爱旅行&quot;});"
                     class="btn btn-info btn-xs">编辑</a>
-                <a href="javascript:deleteTr( 4 );" class="btn btn-danger btn-xs">删除</a>
+                <a href="javascript:;" data-id="{{item.id}}" class="btn btn-danger btn-xs del">删除</a>
             </td>
         </tr>
 
@@ -136,6 +136,7 @@
 
             })
         }
+
         // 2. 添加功能
         // 用到了bootstrap的模态框
         // 它会在页面上弹出一个对话框
@@ -173,6 +174,22 @@
         $('#model_shutoff').click(function () {
             $('#addModal').modal('hide')
         })
+
+        // 3. 删除
+        // 用事件委托 给 删除添加点击事件
+        // （1）获取id
+        $('#category_table').on('click', '.del', function () {
+            var id = $(this).attr('data-id')
+            // （2）请求接口，根据反馈，做后续动作
+            category.del(id).then(function (res) {
+                if (res.code === 200) {
+                    getAndShow()
+                } else {
+                    alert(res.msg)
+                }
+            })
+        })
+
     </script>
 </body>
 
