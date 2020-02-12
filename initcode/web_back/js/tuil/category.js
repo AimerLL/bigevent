@@ -1,7 +1,7 @@
 // 把所有文章分类的相关操作写在这里
 
 var category = {
-    // 文章类别获取
+    // 获取文章类别
     get: function () {
         return $.get(APILIST.category_get)
     },
@@ -14,5 +14,10 @@ var category = {
     del: function (id) {
         return $.post(APILIST.category_del,
             { 'id': id })
+    },
+    // 编辑文章类型
+    edit: function (id, name, slug) {
+        return $.post(APILIST.category_edit,
+            { 'id': id, 'name': name, 'slug': slug })
     }
 }
